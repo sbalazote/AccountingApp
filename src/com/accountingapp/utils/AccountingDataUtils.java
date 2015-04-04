@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class AccountingDataUtils {
 
-	private static Map<String,String> typeOfBillMap = null;
+	public Map<String,String> typeOfBillMap = null;
 	
-	static{
+	public AccountingDataUtils(){
 		
 		typeOfBillMap = new HashMap<String,String>();
 		
@@ -23,7 +23,7 @@ public class AccountingDataUtils {
 		typeOfBillMap.put("TKB", "082");
 	}
 
-	public Map<String, String> getTypeOfBillMap() {
+	public  Map<String, String> getTypeOfBillMap() {
 		return typeOfBillMap;
 	}
 }
