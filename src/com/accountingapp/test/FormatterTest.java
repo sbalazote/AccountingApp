@@ -51,7 +51,7 @@ public class FormatterTest {
 		}	
 		sb.append(importNumber);		
 		assertEquals("0000000000AX4C67",sb.toString());
-	};
+	}
 	
 	@Test
 	public void testIDVendedor() throws Exception {
@@ -69,5 +69,48 @@ public class FormatterTest {
 		
 		assertEquals("00000000020248191024",sb.toString());
 				
+	}
+	
+	@Test
+	public void testNombreVendedor(){
+		int size = 30;
+		String name="Arroyo Cabral Ltda";
+		StringBuffer sbSellerName = new StringBuffer(name);
+		
+		if(name.length() > 30){
+			name = name.substring(0, 30);
+		}else{
+			
+			StringBuffer sbBlanks = new StringBuffer("");
+			for(int i =0; i < size-sbSellerName.length();i++){
+				sbBlanks.append(' ');
+			}
+			sbSellerName.append(sbBlanks);
+		}
+
+		assertEquals(30, sbSellerName.toString().length());
+	}
+	
+	@Test
+	public void testImporte(){
+		
+		int size = 13;
+		String importe ="64,77";
+		String[] priceSplitted = importe.split(",");
+		String integerPart = priceSplitted[0];
+		String decimalPart = priceSplitted[1];
+		
+		if (integerPart.contains(".")){
+			String[] integerPartSplitted = integerPart.split("\\.");
+			integerPart= integerPartSplitted[0]+integerPartSplitted[1];
+		}
+		StringBuffer sb = new StringBuffer("");
+		for(int i=0; i < size - integerPart.length(); i++){
+			sb.append("0");
+		}
+		sb.append(integerPart).append(decimalPart);
+		
+		assertEquals("000000000006477",sb.toString());
+		
 	}
 }
