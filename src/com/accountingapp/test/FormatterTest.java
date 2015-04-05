@@ -52,4 +52,22 @@ public class FormatterTest {
 		sb.append(importNumber);		
 		assertEquals("0000000000AX4C67",sb.toString());
 	};
+	
+	@Test
+	public void testIDVendedor() throws Exception {
+		int tamanio = 20;
+		String idVendedor= "20-24819102-4";
+		String[] idVendedorSplitted = idVendedor.split("-");
+		if(idVendedorSplitted[1].length() < 8){
+			throw new Exception ("Tamanio de cuit invalido");	
+		}
+		String fullIdVendedor = idVendedorSplitted[0] + idVendedorSplitted[1] + idVendedorSplitted[2];
+		StringBuffer sb = new StringBuffer("");
+		for(int i=0; i < tamanio - fullIdVendedor.length();i++)
+			sb.append("0");
+		sb.append(fullIdVendedor);
+		
+		assertEquals("00000000020248191024",sb.toString());
+				
+	}
 }

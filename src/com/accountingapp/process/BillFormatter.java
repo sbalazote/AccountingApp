@@ -59,7 +59,11 @@ public class BillFormatter {
 		return sb.toString();
 	}
 
-
+	private String getsellerIDType(){
+		return "80";
+	}
+	
+	
 	public List<IvaBillObject> createIvaBillObjectList(){
 
 		List<IvaBillObject> ivaBillObjList = new ArrayList<IvaBillObject>();
