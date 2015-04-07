@@ -178,6 +178,28 @@ public class IvaBillObject {
 	public void setIvaCommission(String ivaCommission) {
 		this.ivaCommission = ivaCommission;
 	}
+	@Override
+	public String toString() {
+		return "IvaBillObject [billDate=" + billDate + ", billType=" + billType
+				+ ", pointOfSale=" + pointOfSale + ", billNumber=" + billNumber
+				+ ", importNumber=" + importNumber + ", sellerIDType="
+				+ sellerIDType + ", sellerIDNumber=" + sellerIDNumber
+				+ ", sellerFullName=" + sellerFullName
+				+ ", totalPriceOperation=" + totalPriceOperation
+				+ ", totalPriceConcepts=" + totalPriceConcepts
+				+ ", totalPriceExemptOp=" + totalPriceExemptOp
+				+ ", priceOfIVA=" + priceOfIVA + ", priceOfNationalTaxes="
+				+ priceOfNationalTaxes + ", priceOfIngrBrutTax="
+				+ priceOfIngrBrutTax + ", priceOfMunicipalTax="
+				+ priceOfMunicipalTax + ", priceOfInternalTaxes="
+				+ priceOfInternalTaxes + ", currencyCode=" + currencyCode
+				+ ", typeOfExchange=" + typeOfExchange + ", quantityAlicIva="
+				+ quantityAlicIva + ", codeOperation=" + codeOperation
+				+ ", computableTaxCredit=" + computableTaxCredit
+				+ ", othersTributs=" + othersTributs + ", cuitIssuer="
+				+ cuitIssuer + ", denominationIssuer=" + denominationIssuer
+				+ ", ivaCommission=" + ivaCommission + "]";
+	}
 	
 	
 	
