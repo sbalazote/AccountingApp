@@ -1,6 +1,7 @@
 package com.accountingapp.controller;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -86,6 +87,11 @@ public class AccountingApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @FXML
+    private void clickExit(ActionEvent event) {
+    	Platform.exit();
     }
 
 	private void configureFileChooser(FileChooser fileChooser) {
