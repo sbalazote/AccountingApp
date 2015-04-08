@@ -21,12 +21,12 @@ import com.accountingapp.utils.Constants;
 
 public class XLSReader {
 	
-	public void readFile(){
+	public void readFile(File xlsFile){
 		HSSFWorkbook workbook = null;
 		
 		try {
 
-			FileInputStream file = new FileInputStream(new File("C:\\Users\\Usuario\\Desktop\\IVAbarbaraFEBRERO2015.xls"));
+			FileInputStream file = new FileInputStream(xlsFile);
 
 			//Get the workbook instance for XLS file 
 			workbook = new HSSFWorkbook(file);
@@ -224,9 +224,9 @@ public class XLSReader {
 		}
 	}
 	
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		
 		XLSReader read = new XLSReader();
 		read.readFile();
-	}
+	}*/
 }
