@@ -110,7 +110,30 @@ public class FormatterTest {
 		}
 		sb.append(integerPart).append(decimalPart);
 		
-		assertEquals("000000000006477",sb.toString());
-		
+		assertEquals("000000000006477",sb.toString());	
 	}
+	
+	@Test
+	public void testTipoCambio(){
+		
+		int integerPartSize = 4;
+		int decimalPartSize = 6;
+		String exchange = "1,00";
+		String[] exchangeSplitted = exchange.split(",");
+		String exchangeIntPart = exchangeSplitted[0];
+		String exchangeDecPart = exchangeSplitted[1];
+		StringBuffer sbInt = new StringBuffer();
+		StringBuffer sbDec = new StringBuffer();
+		for(int i=0; i < integerPartSize - exchangeIntPart.length(); i++){
+			sbInt.append("0");
+		}
+		
+		for(int j=0; j < decimalPartSize - exchangeDecPart.length(); j++){
+			sbDec.append("0");
+		}
+		
+		String result = sbInt.append(exchangeIntPart).append(exchangeDecPart).append(sbDec).toString();
+		assertEquals("0001000000".length(),result.length());	
+	}
+		
 }

@@ -7,16 +7,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
 
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 
-import com.accountingapp.obj.IvaBillObject;
+import com.accountingapp.obj.IvaBillObjectReader;
 import com.accountingapp.utils.Constants;
 
 public class XLSReader {
@@ -99,7 +96,7 @@ public class XLSReader {
 	 */
 	public boolean readTaxPurchase(HSSFRow row) {
 
-		IvaBillObject ivaBillObject = new IvaBillObject();
+		IvaBillObjectReader ivaBillObject = new IvaBillObjectReader();
 
 		//fecha de comprobante
 		Cell cell = row.getCell(Constants.BILL_DATE_CELL_NUM);
