@@ -23,16 +23,18 @@ public class TXTWriter {
 	
 	public void writeToTXT() throws IncorrectDataException{
 		
-		List<IvaBillObjectReader> list = xlsReader.getObjectList();
+		List<IvaBillObjectReader> listIvaBillObject = xlsReader.getObjectList();
 	
 		File fileToWrite = new File(pathToWrite);
 		FileWriter fwriter = null;
+		BufferedWriter bw = null;
+		StringBuffer sb = null;
 		try {
 			fwriter = new FileWriter(fileToWrite);
-			BufferedWriter bw = new BufferedWriter(fwriter);			
-			StringBuffer sb = new StringBuffer("");
+			bw = new BufferedWriter(fwriter);			
+			sb = new StringBuffer("");
 			
-			for(IvaBillObjectReader opb : list){
+			for(IvaBillObjectReader opb : listIvaBillObject){
 				
 				sb.append(BillFormatter.getBillDate(opb.getBillDate()));
 				sb.append(BillFormatter.getBillType(opb.getBillType()));
@@ -65,15 +67,15 @@ public class TXTWriter {
 				sb.append(BillFormatter.getAnyPrice(opb.getBillType()));
 				
 				bw.write(sb.toString());
-				
+				sb.delete(0, sb.length());
 			}
-			sb.delete(0, sb.length());
-			bw.flush();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			try {
+				bw.close();
 				fwriter.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
