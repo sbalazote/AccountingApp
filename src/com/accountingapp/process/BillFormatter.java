@@ -1,17 +1,11 @@
 package com.accountingapp.process;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.accountingapp.exc.IncorrectDataException;
-import com.accountingapp.obj.IvaBillObject;
 import com.accountingapp.utils.AccountingDataUtils;
 
 public class BillFormatter {
 
-	private String getBillDate(String date){
+	public static String getBillDate(String date){
 		
 		String[] splitteddate = date.split("/");
 		String billDate = splitteddate[2] + splitteddate[1] + splitteddate[0];
@@ -19,13 +13,13 @@ public class BillFormatter {
 		return billDate;
 	}
 	
-	private String getBillType(String type){
+	public static String getBillType(String type){
 		
 		AccountingDataUtils ad = new AccountingDataUtils();
 		return ad.getTypeOfBillMap().get(type);
 	}
 	
-	private String getPointOfSale(String pointSale){
+	public static String getPointOfSale(String pointSale){
 		
 		int size = 5;
 		for(int i=0; i < size - pointSale.length() ; i++);
@@ -34,7 +28,7 @@ public class BillFormatter {
 		return pointSale;
 	}
 	
-	private String getBillNumber(String pointSale, String billNumber){
+	public static String getBillNumber(String pointSale, String billNumber){
 		
 		int size = 20;	
 		for(int i=0; i < size - billNumber.length() ; i++);
@@ -44,7 +38,7 @@ public class BillFormatter {
 		
 	}
 	
-	private String getImportNumber(String importNumber){
+	public static String getImportNumber(String importNumber){
 	
 		int size = 16;
 		StringBuffer sb = new StringBuffer("");
@@ -62,14 +56,14 @@ public class BillFormatter {
 		return sb.toString();
 	}
 
-	private String getsellerIDType(String id){
+	public static String getSellerIDType(String id){
 		//Note: For now, we will assume that the default value will be 80, for any change or a bussiness rule, we will implement the code here
 		if(id.isEmpty())
 			id="80";	
 		return id;
 	}
 	
-	private String getSellerID(String idSeller) throws IncorrectDataException{
+	public static String getSellerID(String idSeller) throws IncorrectDataException{
 		
 		int size = 20;
 		String[] idSellerSplitted = idSeller.split("-");
@@ -86,7 +80,7 @@ public class BillFormatter {
 
 	}
 	
-	private String getSellerName(String name){
+	public static String getSellerName(String name){
 		
 		int size = 30;
 		StringBuffer sbSellerName = new StringBuffer(name);
@@ -104,7 +98,7 @@ public class BillFormatter {
 		return sbSellerName.toString();
 	}
 	
-	private String getAnyPrice(String price){
+	public static String getAnyPrice(String price){
 		
 		StringBuffer sb = new StringBuffer("");
 		int size=0;
@@ -134,7 +128,7 @@ public class BillFormatter {
 		return sb.toString();
 	}
 	
-	private String getCurrencyCode(String code){
+	public static String getCurrencyCode(String code){
 		/*By default value we will assume de string PES, 
 		 * recieving a blank as a parameter, 
 		 * if not, we would add the code here
@@ -146,7 +140,7 @@ public class BillFormatter {
 		return currencyCode;
 	}
 	
-	private String getTypeExchange(String number){
+	public static String getTypeExchange(String number){
 	
 		int integerPartSize = 4;
 		int decimalPartSize = 6;
@@ -171,7 +165,7 @@ public class BillFormatter {
 		
 	}
 	
-	private String getQuantityOfAlicIva(String quantity){
+	public static String getQuantityOfAlicIva(String quantity){
 		/*
 		 * This quantity depends on the quantity of different iva tax is applied to the same bill
 		 * I've seen 3 different types of iva 10,5%; 21,00% adn 27,00%
@@ -184,7 +178,7 @@ public class BillFormatter {
 		return quantity;
 	}
 
-	private String getOperationCode(String code){
+	public static String getOperationCode(String code){
 		
 		String opCode = null;
 		if(code.isEmpty())
@@ -197,7 +191,7 @@ public class BillFormatter {
 	 * getAnyPrice()
     */
 	
-	private String getCUITIssuer(String cuit) throws IncorrectDataException{
+	public static String getCUITIssuer(String cuit) throws IncorrectDataException{
 		
 		int size = 11;
 		String cuitIssuer = null;
@@ -222,7 +216,7 @@ public class BillFormatter {
 		return cuitIssuer;
 	}
 	
-	private String getDenominationIssuer(String denomination){
+	public static String getDenominationIssuer(String denomination){
 		
 		int size = 15;
 		StringBuffer sb = new StringBuffer("");
@@ -243,22 +237,5 @@ public class BillFormatter {
 	
 		return denominationIssuer;
 	}
-	/* 
-	 *
-	 * denominacion del emisor
-	 */
-	
-	public List<IvaBillObject> createIvaBillObjectList(){
-
-		List<IvaBillObject> ivaBillObjList = new ArrayList<IvaBillObject>();
 		
-		//TODO: Iterate for each reader object and then give the corresponding format to the new object
-		IvaBillObject ivaBillObj = new IvaBillObject();
-		
-		
-		
-		ivaBillObjList.add(ivaBillObj);
-		return ivaBillObjList;
-		
-	}
 }

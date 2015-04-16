@@ -1,4 +1,4 @@
-package com.accountingapp.test;
+package com.accountingapp.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -14,9 +16,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 
 import com.accountingapp.obj.IvaBillObjectReader;
-import com.accountingapp.utils.Constants;
 
 public class XLSReader {
+	
+	public List<IvaBillObjectReader> objectList = new ArrayList<IvaBillObjectReader>();
+	
+	
 	
 	public void readFile(File xlsFile){
 		HSSFWorkbook workbook = null;
@@ -215,10 +220,16 @@ public class XLSReader {
 			cell = row.getCell(Constants.IVA_COMMISSION_CELL_NUM);
 			ivaBillObject.setIvaCommission("");
 
+			objectList.add(ivaBillObject);
+			
 			System.out.println(ivaBillObject.toString());
 
 			return true;
 		}
+	}
+
+	public List<IvaBillObjectReader> getObjectList() {
+		return objectList;
 	}
 	
 	/*public static void main(String[] args){
