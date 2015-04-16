@@ -1,6 +1,6 @@
 package com.accountingapp.obj;
 
-public class IvaBillObjectReader {
+public class IvaBillBuyObjectReader {
 
 	private String billDate; //fecha de comprobante
 	private String billType; //tipo de comprobante

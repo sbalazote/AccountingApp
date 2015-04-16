@@ -28,6 +28,20 @@ public class FormatterTest {
 	}
 	
 	@Test
+	public void testNumeroFactura(){
+		
+		int tamanio = 20;
+		String numfactura= "00013301";
+		StringBuffer sb = new StringBuffer("");
+		for(int i=0; i < tamanio - numfactura.length() ; i++)
+			sb.append("0");
+		
+		assertEquals("00000000000000013301".length(), sb.append(numfactura).toString().length());
+		
+		
+	}
+	
+	@Test
 	public void testImportacionEmpty(){
 		
 		int tamanio = 16;

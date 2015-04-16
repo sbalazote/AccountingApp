@@ -1,5 +1,7 @@
 package com.accountingapp.process;
 
+import static org.junit.Assert.assertEquals;
+
 import com.accountingapp.exc.IncorrectDataException;
 import com.accountingapp.utils.AccountingDataUtils;
 
@@ -28,13 +30,14 @@ public class BillFormatter {
 		return pointSale;
 	}
 	
-	public static String getBillNumber(String pointSale, String billNumber){
-		
+	public static String getBillNumber(String billNumber){
+			
 		int size = 20;	
+		StringBuffer sb = new StringBuffer("");
 		for(int i=0; i < size - billNumber.length() ; i++);
-			billNumber= "0" + pointSale ;
-	
-		return billNumber;
+			sb.append("0");
+		
+		return sb.append(billNumber).toString();
 		
 	}
 	

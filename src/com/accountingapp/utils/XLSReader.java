@@ -15,11 +15,13 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 
-import com.accountingapp.obj.IvaBillObjectReader;
+import com.accountingapp.obj.IvaBillBuyObjectReader;
+import com.accountingapp.obj.IvaBillSellObjectReader;
 
 public class XLSReader {
 	
-	public List<IvaBillObjectReader> objectList = new ArrayList<IvaBillObjectReader>();
+	public List<IvaBillBuyObjectReader> objectListBuy = new ArrayList<IvaBillBuyObjectReader>();
+	public List<IvaBillSellObjectReader> objectListSell = new ArrayList<IvaBillSellObjectReader>();
 	
 	
 	
@@ -101,7 +103,7 @@ public class XLSReader {
 	 */
 	public boolean readTaxPurchase(HSSFRow row) {
 
-		IvaBillObjectReader ivaBillObject = new IvaBillObjectReader();
+		IvaBillBuyObjectReader ivaBillObject = new IvaBillBuyObjectReader();
 
 		//fecha de comprobante
 		Cell cell = row.getCell(Constants.BILL_DATE_CELL_NUM);
@@ -220,7 +222,7 @@ public class XLSReader {
 			cell = row.getCell(Constants.IVA_COMMISSION_CELL_NUM);
 			ivaBillObject.setIvaCommission("");
 
-			objectList.add(ivaBillObject);
+			objectListBuy.add(ivaBillObject);
 			
 			System.out.println(ivaBillObject.toString());
 
@@ -228,8 +230,12 @@ public class XLSReader {
 		}
 	}
 
-	public List<IvaBillObjectReader> getObjectList() {
-		return objectList;
+	public List<IvaBillBuyObjectReader> getObjectListBuy() {
+		return objectListBuy;
+	}
+
+	public List<IvaBillSellObjectReader> getObjectListSell() {
+		return objectListSell;
 	}
 	
 	/*public static void main(String[] args){
