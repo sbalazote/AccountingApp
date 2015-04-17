@@ -2,6 +2,14 @@ package com.accountingapp.test;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import org.junit.Test;
 
 public class FormatterTest {
@@ -148,6 +156,20 @@ public class FormatterTest {
 		
 		String result = sbInt.append(exchangeIntPart).append(exchangeDecPart).append(sbDec).toString();
 		assertEquals("0001000000".length(),result.length());	
+	}
+	
+	@Test
+	public void testNullDate() throws ParseException{
+		String date="28/02/2015";
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date billOfdate = formatter.parse(date);
+		Calendar cal = new GregorianCalendar();
+		cal.setTimeInMillis(billOfdate.getTime());
+		cal.add(Calendar.DAY_OF_WEEK, 10);
+		Date dateAddedTen = new Date(cal.getTimeInMillis());
+		String dateToString = formatter.format(dateAddedTen);
+	
+		System.out.println(dateToString);
 	}
 		
 }

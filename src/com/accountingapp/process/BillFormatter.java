@@ -1,18 +1,36 @@
 package com.accountingapp.process;
 
-import static org.junit.Assert.assertEquals;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import com.accountingapp.exc.IncorrectDataException;
 import com.accountingapp.utils.AccountingDataUtils;
 
 public class BillFormatter {
 
-	public static String getBillDate(String date){
+	public static String getBillDate(String date) {
 		
 		String[] splitteddate = date.split("/");
-		String billDate = splitteddate[2] + splitteddate[1] + splitteddate[0];
+		String billDate= splitteddate[2] + splitteddate[1] + splitteddate[0];
 		
 		return billDate;
+	}
+	
+	public static String getDuePayDate(String date) throws ParseException {
+		
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date billOfdate = formatter.parse(date);
+		Calendar cal = new GregorianCalendar();
+		cal.setTimeInMillis(billOfdate.getTime());
+		cal.add(Calendar.DAY_OF_WEEK, 10);
+		Date dateAddedTen = new Date(cal.getTimeInMillis());
+		String dateToString = formatter.format(dateAddedTen);
+		
+		return dateToString;
 	}
 	
 	public static String getBillType(String type){

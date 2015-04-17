@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import com.accountingapp.exc.IncorrectDataException;
@@ -81,7 +82,7 @@ public class TXTWriter {
 		}
 	}
 	
-	public void writeToTXTIvaSell() throws IncorrectDataException{
+	public void writeToTXTIvaSell() throws IncorrectDataException, ParseException{
 		
 		List<IvaBillSellObjectReader> listIvaSellBillObject = xlsReader.getObjectListSell();
 		
@@ -118,7 +119,13 @@ public class TXTWriter {
 				sb.append(BillFormatter.getQuantityOfAlicIva(opb.getQuantityAlicIva()));
 				sb.append(BillFormatter.getOperationCode(opb.getCodeOperation()));
 				sb.append(BillFormatter.getAnyPrice(opb.getOthersTributs()));
-				sb.append(BillFormatter.getBillDate(opb.getDuePayDate()));
+				
+				if(!"".equals(opb.getDuePayDate())){
+					sb.append(BillFormatter.getBillDate(opb.getDuePayDate()));
+				}else{
+					sb.append(BillFormatter.getDuePayDate(opb.getBillDate()));
+				}
+				 
 				
 				bw.write(sb.toString());
 				sb.delete(0, sb.length());
