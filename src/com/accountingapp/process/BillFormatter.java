@@ -128,12 +128,7 @@ public class BillFormatter {
 			String[] priceSplitted = price.split(",");
 			String integerPart = priceSplitted[0];
 			String decimalPart = priceSplitted[1];
-			
-			if (integerPart.contains(".")){
-				String[] integerPartSplitted = integerPart.split("\\.");
-				integerPart= integerPartSplitted[0]+integerPartSplitted[1];
-			}
-			
+						
 			for(int i=0; i < size - integerPart.length(); i++){
 				sb.append("0");
 			}

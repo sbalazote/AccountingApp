@@ -3,9 +3,9 @@ package com.accountingapp.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +62,7 @@ public class XLSReader {
 				}
 				
 			file.close();
-			FileOutputStream out = 
-					new FileOutputStream(new File("C:\\Users\\Usuario\\Desktop\\output.xls"));
-			workbook.write(out);
-			out.close();
-
+		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException ex) {
@@ -114,7 +110,7 @@ public class XLSReader {
 			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");//"EEE MMM dd HH:mm:ss z yyyy"
 			String billDate = df.format(cell.getDateCellValue());
 			ivaBillObject.setBillDate(billDate);
-
+			DecimalFormat decformat = new DecimalFormat("0.00");
 
 			//tipo de comprobante
 			cell = row.getCell(Constants.BILL_TYPE_CELL_NUM);
@@ -151,7 +147,7 @@ public class XLSReader {
 
 			//importe total operacion
 			cell = row.getCell(Constants.TOTAL_PRICE_OPERATION_CELL_NUM);
-			String totalPriceOperation = Double.toString(cell.getNumericCellValue());
+			String totalPriceOperation = decformat.format(cell.getNumericCellValue());
 			ivaBillObject.setTotalPriceOperation(totalPriceOperation);
 
 			//importe total de conc. que no integral el precio neto gravado
@@ -160,12 +156,13 @@ public class XLSReader {
 
 			//importe operaciones exentas
 			cell = row.getCell(Constants.TOTAL_PRICE_EXEMPT_OP_CELL_NUM);
-			String totalPriceExemptOp = Double.toString(cell.getNumericCellValue());
+			
+			String totalPriceExemptOp = decformat.format(cell.getNumericCellValue());
 			ivaBillObject.setTotalPriceExemptOp(totalPriceExemptOp);
 
 			//importe de perc. o pagos a cta del iva
 			cell = row.getCell(Constants.PRICE_OF_IVA_CELL_NUM);
-			String priceOfIVA = Double.toString(cell.getNumericCellValue());
+			String priceOfIVA = decformat.format(cell.getNumericCellValue());
 			ivaBillObject.setPriceOfIVA(priceOfIVA);
 
 			//importe de perc. a cta de impuestos nacionales
@@ -174,7 +171,7 @@ public class XLSReader {
 
 			//importe de percepciones de ing. brutos
 			cell = row.getCell(Constants.PRICE_OF_INGR_BRUT_TAX_CELL_NUM);
-			String priceOfIngrBrutTax = Double.toString(cell.getNumericCellValue());
+			String priceOfIngrBrutTax = decformat.format(cell.getNumericCellValue());
 			ivaBillObject.setPriceOfIngrBrutTax(priceOfIngrBrutTax);
 
 			//importe de percepciones de impuestos municipales
@@ -183,7 +180,7 @@ public class XLSReader {
 
 			// importe impuestos internos
 			cell = row.getCell(Constants.PRICE_OF_INTERNAL_TAXES_CELL_NUM);
-			String priceOfInternalTaxes = Double.toString(cell.getNumericCellValue());
+			String priceOfInternalTaxes = decformat.format(cell.getNumericCellValue());
 			ivaBillObject.setPriceOfInternalTaxes(priceOfInternalTaxes);
 
 			//codigo de moneda

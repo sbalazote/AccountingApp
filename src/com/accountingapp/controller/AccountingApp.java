@@ -17,6 +17,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import com.accountingapp.exc.IncorrectDataException;
+import com.accountingapp.utils.TXTWriter;
 import com.accountingapp.utils.XLSReader;
 
 public class AccountingApp extends Application {
@@ -24,6 +26,9 @@ public class AccountingApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     @FXML private Button okButton;
+	private String xlsFileName;
+	private String outputFolderPath;
+	private String xlsFileNamePath;
     
     @Override
     public void start(Stage primaryStage) {
@@ -61,8 +66,9 @@ public class AccountingApp extends Application {
         configureFileChooser(fileChooser);
         File file = fileChooser.showOpenDialog(primaryStage);
         if (file != null) {
-        	XLSReader reader = new XLSReader();
-        	reader.readFile(file);
+        	xlsFileNamePath = file.getAbsolutePath();
+        	String[] xlsFileNameSplitted = file.getName().split("\\.");
+        	xlsFileName = xlsFileNameSplitted[0];
         }
 	}
     
@@ -73,13 +79,16 @@ public class AccountingApp extends Application {
     	File defaultDirectory = new File("c:/");
     	chooser.setInitialDirectory(defaultDirectory);
     	File selectedDirectory = chooser.showDialog(primaryStage);
-    	System.out.println(selectedDirectory.getAbsolutePath());
+    	outputFolderPath = selectedDirectory.getAbsolutePath();
 	}
     
     @FXML
-    private void process(ActionEvent event) {
-    	
-	}
+    private void generateTxt(ActionEvent event) throws IncorrectDataException {
+    	XLSReader reader = new XLSReader();
+    	reader.readFile(new File(xlsFileNamePath));
+    	TXTWriter write = new TXTWriter(outputFolderPath+"\\"+xlsFileName+".txt",reader);
+    	write.writeToTXTIvaBuy();
+    }
     
     @FXML
     private void closeButtonAction(){

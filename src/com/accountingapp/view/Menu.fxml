@@ -82,7 +82,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-         <Button mnemonicParsing="false" onAction="process" text="Procesar" />
+         <Button mnemonicParsing="false" onAction="#generateTxt" text="Procesar" />
    </FlowPane>
 		
 		

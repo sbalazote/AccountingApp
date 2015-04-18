@@ -18,14 +18,15 @@ public class TXTWriter {
 	public String pathToWrite = null;
 	
 	
-	public TXTWriter(String path){
+	public TXTWriter(String path,XLSReader xlsReader){
 		pathToWrite = path;
+		this.xlsReader = xlsReader;
 				
 	}
 	
 	public void writeToTXTIvaBuy() throws IncorrectDataException{
 		
-		List<IvaBillBuyObjectReader> listIvaBillObject = xlsReader.getObjectListBuy();
+		List<IvaBillBuyObjectReader> listIvaBillObject = this.xlsReader.getObjectListBuy();
 	
 		File fileToWrite = new File(pathToWrite);
 		FileWriter fwriter = null;
@@ -62,9 +63,10 @@ public class TXTWriter {
 				sb.append(BillFormatter.getAnyPrice(opb.getOthersTributs()));
 				sb.append(BillFormatter.getCUITIssuer(opb.getCuitIssuer()));
 				sb.append(BillFormatter.getDenominationIssuer(opb.getDenominationIssuer()));
-				sb.append(BillFormatter.getAnyPrice(opb.getBillType()));
+				sb.append(BillFormatter.getAnyPrice(opb.getIvaCommission()));
 				
 				bw.write(sb.toString());
+				bw.write("\n");
 				sb.delete(0, sb.length());
 			}
 			
@@ -73,12 +75,12 @@ public class TXTWriter {
 			e.printStackTrace();
 		}finally{
 			try {
-				bw.close();
 				fwriter.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
 	}
 	
