@@ -67,6 +67,7 @@ public class TXTWriter {
 				
 				bw.write(sb.toString());
 				bw.write("\n");
+				bw.flush();
 				sb.delete(0, sb.length());
 			}
 			

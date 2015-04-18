@@ -50,7 +50,8 @@ public class BillFormatter {
 	
 	public static String getBillNumber(String billNumber){
 			
-		int size = 20;	
+		int size = 20;
+		billNumber = billNumber.substring(0, 8);
 		StringBuffer sb = new StringBuffer("");
 		for(int i=0; i < size - billNumber.length() ; i++);
 			sb.append("0");
@@ -114,9 +115,10 @@ public class BillFormatter {
 				sbBlanks.append(' ');
 			}
 			sbSellerName.append(sbBlanks);
+			name = sbSellerName.toString();
 		}
 		
-		return sbSellerName.toString();
+		return name;
 	}
 	
 	public static String getAnyPrice(String price){

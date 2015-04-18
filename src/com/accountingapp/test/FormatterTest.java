@@ -96,7 +96,7 @@ public class FormatterTest {
 	@Test
 	public void testNombreVendedor(){
 		int size = 30;
-		String name="Arroyo Cabral Ltda";
+		String name="Cerveceria";
 		StringBuffer sbSellerName = new StringBuffer(name);
 		
 		if(name.length() > 30){
@@ -108,9 +108,10 @@ public class FormatterTest {
 				sbBlanks.append(' ');
 			}
 			sbSellerName.append(sbBlanks);
+			name = sbSellerName.toString();
 		}
 
-		assertEquals(30, sbSellerName.toString().length());
+		assertEquals(30, name.length());
 	}
 	
 	@Test
