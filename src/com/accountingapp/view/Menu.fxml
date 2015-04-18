@@ -6,28 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@DarkTheme.css"
-	xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="com.accountingapp.controller.AccountingApp">
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.accountingapp.controller.AccountingApp">
 	<top>
-		<MenuBar prefHeight="30.0" prefWidth="600.0"
-			BorderPane.alignment="CENTER">
+		<MenuBar prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
 			<menus>
 				<Menu mnemonicParsing="false" text="Archivo">
 					<graphic>
-						<ImageView fitHeight="15.0" fitWidth="20.0"
-							pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@file_icon.png" />
 							</image>
 						</ImageView>
 					</graphic>
 					<items>
-						<MenuItem mnemonicParsing="false" text="Cerrar" onAction="#clickExit">
+						<MenuItem mnemonicParsing="false" onAction="#clickExit" text="Cerrar">
 							<graphic>
-								<ImageView fitHeight="15.0" fitWidth="20.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@exit_icon.png" />
 									</image>
@@ -38,8 +32,7 @@
 				</Menu>
 				<Menu mnemonicParsing="false" text="Ajustes">
 					<graphic>
-						<ImageView fitHeight="15.0" fitWidth="20.0"
-							pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@settings_icon.png" />
 							</image>
@@ -48,19 +41,16 @@
 				</Menu>
 				<Menu mnemonicParsing="false" text="Ayuda">
 					<graphic>
-						<ImageView fitHeight="15.0" fitWidth="20.0"
-							pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@help_icon.png" />
 							</image>
 						</ImageView>
 					</graphic>
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#clickAbout"
-							text="Acerca de...">
+						<MenuItem mnemonicParsing="false" onAction="#clickAbout" text="Acerca de...">
 							<graphic>
-								<ImageView fitHeight="15.0" fitWidth="20.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@about_icon.png" />
 									</image>
@@ -73,16 +63,29 @@
 		</MenuBar>
 	</top>
 	<center>
-		<Button mnemonicParsing="false" onAction="#selectXLS" text="Seleccionar XLS"
-			textOverrun="WORD_ELLIPSIS" BorderPane.alignment="CENTER">
+	<FlowPane>
+	<Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#selectXLS" text="Seleccionar XLS" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="CENTER">
 			<graphic>
-				<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@open_icon.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
+	<Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#selectOutputFolder" text="Seleccionar Carpeta Destino" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="CENTER">
+			<graphic>
+				<ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@open_icon.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+         <Button mnemonicParsing="false" onAction="process" text="Procesar" />
+   </FlowPane>
+		
+		
 	</center>
+      
 </BorderPane>

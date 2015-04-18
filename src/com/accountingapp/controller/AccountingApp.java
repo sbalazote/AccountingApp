@@ -1,24 +1,23 @@
 package com.accountingapp.controller;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 
-import com.accountingapp.utils.XLSReader;
-
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import com.accountingapp.utils.XLSReader;
 
 public class AccountingApp extends Application {
 
@@ -65,6 +64,21 @@ public class AccountingApp extends Application {
         	XLSReader reader = new XLSReader();
         	reader.readFile(file);
         }
+	}
+    
+    @FXML
+    private void selectOutputFolder(ActionEvent event) {
+    	DirectoryChooser chooser = new DirectoryChooser();
+    	chooser.setTitle("Seleccione Carpeta de Destino...");
+    	File defaultDirectory = new File("c:/");
+    	chooser.setInitialDirectory(defaultDirectory);
+    	File selectedDirectory = chooser.showDialog(primaryStage);
+    	System.out.println(selectedDirectory.getAbsolutePath());
+	}
+    
+    @FXML
+    private void process(ActionEvent event) {
+    	
 	}
     
     @FXML

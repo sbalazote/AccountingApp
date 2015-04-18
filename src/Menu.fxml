@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar layoutY="3.0" prefHeight="30.0" prefWidth="600.0">
@@ -27,6 +26,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button layoutX="274.0" layoutY="144.0" mnemonicParsing="false" onAction="#AccountingApp" onMouseClicked="#selectXLS" text="Seleccionar XLS" textOverrun="WORD_ELLIPSIS" />
+      <Button layoutX="241.0" layoutY="144.0" mnemonicParsing="false" onAction="#AccountingApp" onMouseClicked="#selectXLS" text="Seleccionar XLS" textOverrun="WORD_ELLIPSIS" />
+      <Button layoutX="208.0" layoutY="242.0" mnemonicParsing="false" onAction="#AccountingApp" onMouseClicked="#selectOutputFolder" text="Seleccionar Carpeta Destino" textOverrun="WORD_ELLIPSIS" />
    </children>
 </AnchorPane>
