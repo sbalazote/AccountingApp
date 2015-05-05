@@ -1,19 +1,19 @@
-package com.accountingapp.obj;
+package com.accountingapp.model;
 
-public class IvaBillSellObjectReader {
+public class TaxPurchaseBill {
 
 	private String billDate; //fecha de comprobante
 	private String billType; //tipo de comprobante
 	private String pointOfSale; //punto de venta
 	private String billNumber; //numero de comprobante
-	private String billEndNumber; //numero de comprobante hasta
+	private String importNumber; //numero de despacho de importacion
 	private String sellerIDType; //codigo de documento vendedor
 	private String sellerIDNumber; //numero de identificacion del vendedor
 	private String sellerFullName; //apellido y nombre del vendedor
 	private String totalPriceOperation; //importe total operacion
 	private String totalPriceConcepts; //importe total de conc. que no integral el precio neto gravado
-	private String unCategorizePerceps; //percepciones no categorizadas
 	private String totalPriceExemptOp; //importe operaciones exentas
+	private String priceOfIVA; //importe de perc. o pagos a cta del iva
 	private String priceOfNationalTaxes; //importe de perc. a cta de impuestos nacionales
 	private String priceOfIngrBrutTax; //importe de percepciones de ing. brutos
 	private String priceOfMunicipalTax; //importe de percepciones de impuestos municipales
@@ -22,8 +22,11 @@ public class IvaBillSellObjectReader {
 	private String typeOfExchange; //tipo de cambio
 	private String quantityAlicIva; //cantidad de alicuotas de iva
 	private String codeOperation; //codigo de operacion
+	private String computableTaxCredit; //credito fiscal computable
 	private String othersTributs; //otros tributos
-	private String duePayDate; //fecha de vencimiento de pago
+	private String cuitIssuer; //cuit emisor
+	private String denominationIssuer; //denominacion del emisor
+	private String ivaCommission; //comision iva
 	
 	public String getBillDate() {
 		return billDate;
@@ -49,11 +52,11 @@ public class IvaBillSellObjectReader {
 	public void setBillNumber(String billNumber) {
 		this.billNumber = billNumber;
 	}
-	public String getBillEndNumber() {
-		return billEndNumber;
+	public String getImportNumber() {
+		return importNumber;
 	}
-	public void setBillEndNumber(String billEndNumber) {
-		this.billEndNumber = billEndNumber;
+	public void setImportNumber(String importNumber) {
+		this.importNumber = importNumber;
 	}
 	public String getSellerIDType() {
 		return sellerIDType;
@@ -85,17 +88,17 @@ public class IvaBillSellObjectReader {
 	public void setTotalPriceConcepts(String totalPriceConcepts) {
 		this.totalPriceConcepts = totalPriceConcepts;
 	}
-	public String getUnCategorizePerceps() {
-		return unCategorizePerceps;
-	}
-	public void setUnCategorizePerceps(String unCategorizePerceps) {
-		this.unCategorizePerceps = unCategorizePerceps;
-	}
 	public String getTotalPriceExemptOp() {
 		return totalPriceExemptOp;
 	}
 	public void setTotalPriceExemptOp(String totalPriceExemptOp) {
 		this.totalPriceExemptOp = totalPriceExemptOp;
+	}
+	public String getPriceOfIVA() {
+		return priceOfIVA;
+	}
+	public void setPriceOfIVA(String priceOfIVA) {
+		this.priceOfIVA = priceOfIVA;
 	}
 	public String getPriceOfNationalTaxes() {
 		return priceOfNationalTaxes;
@@ -145,17 +148,62 @@ public class IvaBillSellObjectReader {
 	public void setCodeOperation(String codeOperation) {
 		this.codeOperation = codeOperation;
 	}
+	public String getComputableTaxCredit() {
+		return computableTaxCredit;
+	}
+	public void setComputableTaxCredit(String computableTaxCredit) {
+		this.computableTaxCredit = computableTaxCredit;
+	}
 	public String getOthersTributs() {
 		return othersTributs;
 	}
 	public void setOthersTributs(String othersTributs) {
 		this.othersTributs = othersTributs;
 	}
-	public String getDuePayDate() {
-		return duePayDate;
+	public String getCuitIssuer() {
+		return cuitIssuer;
 	}
-	public void setDuePayDate(String duePayDate) {
-		this.duePayDate = duePayDate;
+	public void setCuitIssuer(String cuitIssuer) {
+		this.cuitIssuer = cuitIssuer;
 	}
+	public String getDenominationIssuer() {
+		return denominationIssuer;
+	}
+	public void setDenominationIssuer(String denominationIssuer) {
+		this.denominationIssuer = denominationIssuer;
+	}
+	public String getIvaCommission() {
+		return ivaCommission;
+	}
+	public void setIvaCommission(String ivaCommission) {
+		this.ivaCommission = ivaCommission;
+	}
+	@Override
+	public String toString() {
+		return "TaxPurchaseBill [billDate=" + billDate + ", billType=" + billType
+				+ ", pointOfSale=" + pointOfSale + ", billNumber=" + billNumber
+				+ ", importNumber=" + importNumber + ", sellerIDType="
+				+ sellerIDType + ", sellerIDNumber=" + sellerIDNumber
+				+ ", sellerFullName=" + sellerFullName
+				+ ", totalPriceOperation=" + totalPriceOperation
+				+ ", totalPriceConcepts=" + totalPriceConcepts
+				+ ", totalPriceExemptOp=" + totalPriceExemptOp
+				+ ", priceOfIVA=" + priceOfIVA + ", priceOfNationalTaxes="
+				+ priceOfNationalTaxes + ", priceOfIngrBrutTax="
+				+ priceOfIngrBrutTax + ", priceOfMunicipalTax="
+				+ priceOfMunicipalTax + ", priceOfInternalTaxes="
+				+ priceOfInternalTaxes + ", currencyCode=" + currencyCode
+				+ ", typeOfExchange=" + typeOfExchange + ", quantityAlicIva="
+				+ quantityAlicIva + ", codeOperation=" + codeOperation
+				+ ", computableTaxCredit=" + computableTaxCredit
+				+ ", othersTributs=" + othersTributs + ", cuitIssuer="
+				+ cuitIssuer + ", denominationIssuer=" + denominationIssuer
+				+ ", ivaCommission=" + ivaCommission + "]";
+	}
+	
+	
+	
 
+	
+	
 }

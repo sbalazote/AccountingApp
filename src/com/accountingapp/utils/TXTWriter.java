@@ -8,8 +8,8 @@ import java.text.ParseException;
 import java.util.List;
 
 import com.accountingapp.exc.IncorrectDataException;
-import com.accountingapp.obj.IvaBillBuyObjectReader;
-import com.accountingapp.obj.IvaBillSellObjectReader;
+import com.accountingapp.model.TaxPurchaseBill;
+import com.accountingapp.model.TaxSaleBill;
 import com.accountingapp.process.BillFormatter;
 
 public class TXTWriter {
@@ -26,7 +26,7 @@ public class TXTWriter {
 	
 	public void writeToTXTIvaBuy() throws IncorrectDataException{
 		
-		List<IvaBillBuyObjectReader> listIvaBillObject = this.xlsReader.getObjectListBuy();
+		List<TaxPurchaseBill> listIvaBillObject = this.xlsReader.getObjectListBuy();
 	
 		File fileToWrite = new File(pathToWrite);
 		FileWriter fwriter = null;
@@ -37,7 +37,7 @@ public class TXTWriter {
 			bw = new BufferedWriter(fwriter);			
 			sb = new StringBuffer("");
 			
-			for(IvaBillBuyObjectReader opb : listIvaBillObject){
+			for(TaxPurchaseBill opb : listIvaBillObject){
 				
 				sb.append(BillFormatter.getBillDate(opb.getBillDate()));
 				sb.append(BillFormatter.getBillType(opb.getBillType()));
@@ -87,7 +87,7 @@ public class TXTWriter {
 	
 	public void writeToTXTIvaSell() throws IncorrectDataException, ParseException{
 		
-		List<IvaBillSellObjectReader> listIvaSellBillObject = xlsReader.getObjectListSell();
+		List<TaxSaleBill> listIvaSellBillObject = xlsReader.getObjectListSell();
 		
 		File fileToWrite = new File(pathToWrite);
 		FileWriter fwriter = null;
@@ -99,7 +99,7 @@ public class TXTWriter {
 			bw = new BufferedWriter(fwriter);			
 			sb = new StringBuffer("");
 		
-			for(IvaBillSellObjectReader opb : listIvaSellBillObject){
+			for(TaxSaleBill opb : listIvaSellBillObject){
 				
 				sb.append(BillFormatter.getBillDate(opb.getBillDate()));
 				sb.append(BillFormatter.getBillType(opb.getBillType()));
