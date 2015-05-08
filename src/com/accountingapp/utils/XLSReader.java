@@ -8,9 +8,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -27,7 +25,8 @@ public class XLSReader {
 	public List<TaxSaleBill> objectListSell = new ArrayList<TaxSaleBill>();
 	boolean initTicketGroup = false;
 	float ticketGroupAmount = 0.0f;
-	int ticketGroupFrom = 0, ticketGroupTo = 0;
+	float BTypeBillGroupAmount = 0.0f;
+	int ticketGroupFrom = 0, ticketGroupTo = 0, BTypeBillGroupFrom = 0, BTypeBillGroupTo = 0;
 	
 	
 	public void readFile(File xlsFile){
@@ -71,6 +70,7 @@ public class XLSReader {
 			Cell cell = row.getCell(Constants.TAX_SALE_TICKETS_MONTH_DATE_CELL_NUM);
 			Date monthYear = cell.getDateCellValue();
 			String ticketDate = CalendarUtils.getInstance().getLastDayOfMonth(monthYear);
+			
 			// Leo los tickets de ventas.
 			for (int i = taxSalesTicketsCurrentRowNum; i < (taxSalesTicketsCurrentRowNum+31); i++) {
 				row = taxSalesSheet.getRow(i);
@@ -83,11 +83,11 @@ public class XLSReader {
 				taxSalesATypeBillValidData = readTaxSaleATypeBill(row);
 				taxSalesATypeBillCurrentRowNum++;
 			}
-			
+
 			// Leo las facturas B de ventas.
 			while (taxSalesBTypeBillValidData) {
 				row = taxSalesSheet.getRow(taxSalesBTypeBillCurrentRowNum);
-				taxSalesBTypeBillValidData = readTaxSaleBTypeBill(row);
+				taxSalesBTypeBillValidData = readTaxSaleBTypeBill(row, ticketDate);
 				taxSalesBTypeBillCurrentRowNum++;
 			}
 
@@ -106,17 +106,19 @@ public class XLSReader {
 			}
 		}
 	}
-	
+
 	/**
 	 * Este metodo procesa todos los TICKETs.
-	 * @param row La fila leida de la planilla de calculo.
+	 * 
+	 * @param row
+	 *            La fila leida de la planilla de calculo.
 	 */
 	private void readTaxSaleTicket(HSSFRow row, String ticketDate) {
 		TaxSaleBill ivaBillObject = new TaxSaleBill();
-		
+
 		// Leo tickets por grupos hasta leer el mes completo.
 		Cell cell = row.getCell(Constants.TAX_SALE_TICKET_TYPE_CELL_NUM);
-		
+
 		if ((cell.getCellType() == Cell.CELL_TYPE_BLANK) && (initTicketGroup)) {
 			// aca lei un grupo de tickets.
 			ivaBillObject.setBillDate(ticketDate);
@@ -124,8 +126,9 @@ public class XLSReader {
 			ivaBillObject.setPointOfSale("0002");
 			ivaBillObject.setBillNumber(String.valueOf(ticketGroupFrom));
 			ivaBillObject.setBillEndNumber(String.valueOf(ticketGroupTo));
-			ivaBillObject.setSellerIDType("80");
-			ivaBillObject.setSellerFullName("");
+			ivaBillObject.setBuyerIDType("");
+			ivaBillObject.setBuyerIDNumber("");
+			ivaBillObject.setBuyerFullName("");
 			ivaBillObject.setTotalPriceOperation(String.valueOf(ticketGroupAmount));
 			ivaBillObject.setTotalPriceConcepts("");
 			ivaBillObject.setUnCategorizePerceps("");
@@ -159,15 +162,77 @@ public class XLSReader {
 			ticketGroupAmount += cell.getNumericCellValue();
 		}
 	}
-	
+
 	/**
-	 * Este metodo procesa las facturas A. 
-	 * @param row La fila leida de la planilla de calculo.
+	 * Este metodo procesa las facturas A.
+	 * 
+	 * @param row
+	 *            La fila leida de la planilla de calculo.
 	 * @return true si la factura es valida; false en caso contrario.
 	 */
 	private boolean readTaxSaleATypeBill(HSSFRow row) {
-		// TODO Auto-generated method stub
-		return false;
+		TaxSaleBill ivaBillObject = new TaxSaleBill();
+
+		// Leo una factura.
+		Cell cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_CELL_NUM);
+		// si la primer celda que indica tipo de documento esta en blanco termine de leer.
+		if (cell.getCellType() == Cell.CELL_TYPE_BLANK) {
+			return false;
+		} else {
+			//fecha de comprobante
+			cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_DATE_CELL_NUM);
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");//"EEE MMM dd HH:mm:ss z yyyy"
+			String billDate = df.format(cell.getDateCellValue());
+			ivaBillObject.setBillDate(billDate);
+			
+			//tipo de comprobante
+			// TODO que va aca?
+			String billType = "FA";
+			ivaBillObject.setBillType(billType);
+
+			//punto de venta
+			String pointOfSale = "0001";
+			ivaBillObject.setPointOfSale(pointOfSale);
+			
+			//numero de comprobante
+			cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_NUMBER_CELL_NUM);
+			String billNumber = cell.getStringCellValue();
+			ivaBillObject.setBillNumber(billNumber);
+			ivaBillObject.setBillEndNumber(billNumber);
+			
+			//numero de identificacion del comprador
+			cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_BUYER_ID_NUMBER_CELL_NUM);
+			String buyerIDNumber = cell.getStringCellValue();
+			ivaBillObject.setBuyerIDNumber(buyerIDNumber);
+
+			//apellido y nombre del comprador
+			cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_BUYER_FULLNAME_CELL_NUM);
+			String buyerFullName = cell.getStringCellValue();
+			ivaBillObject.setBuyerFullName(buyerFullName);
+
+			//importe total operacion
+			cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_TOTAL_PRICE_OPERATION_CELL_NUM);
+			float totalPriceOperation = (float) cell.getNumericCellValue();
+			ivaBillObject.setTotalPriceOperation(String.valueOf(totalPriceOperation));
+
+			ivaBillObject.setBuyerIDType("");
+			ivaBillObject.setTotalPriceConcepts("");
+			ivaBillObject.setUnCategorizePerceps("");
+			ivaBillObject.setTotalPriceExemptOp("");
+			ivaBillObject.setPriceOfNationalTaxes("");
+			ivaBillObject.setPriceOfIngrBrutTax("");
+			ivaBillObject.setPriceOfMunicipalTax("");
+			ivaBillObject.setPriceOfInternalTaxes("");
+			ivaBillObject.setCurrencyCode("");
+			ivaBillObject.setTypeOfExchange("");
+			ivaBillObject.setQuantityAlicIva("");
+			ivaBillObject.setCodeOperation("");
+			ivaBillObject.setOthersTributs("");
+			ivaBillObject.setDuePayDate("");
+			objectListSell.add(ivaBillObject);
+			System.out.println(ivaBillObject.toString());
+			return true;
+		}
 	}
 	
 	/**
@@ -175,9 +240,65 @@ public class XLSReader {
 	 * @param row La fila leida de la planilla de calculo.
 	 * @return true si la factura es valida; false en caso contrario.
 	 */
-	private boolean readTaxSaleBTypeBill(HSSFRow row) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean readTaxSaleBTypeBill(HSSFRow row, String billDate) {
+		// Leo una factura.
+		Cell cell = row.getCell(Constants.TAX_SALE_B_TYPE_BILL_CELL_NUM);
+		// si la primer celda que indica tipo de documento esta en blanco termine de leer.
+		if (cell.getCellType() == Cell.CELL_TYPE_BLANK) {
+			TaxSaleBill ivaBillObject = new TaxSaleBill();
+			//fecha de comprobante
+			ivaBillObject.setBillDate(billDate);
+			
+			//tipo de comprobante
+			// TODO que va aca?
+			String billType = "FB";
+			ivaBillObject.setBillType(billType);
+
+			//punto de venta
+			String pointOfSale = "0001";
+			ivaBillObject.setPointOfSale(pointOfSale);
+			
+			//numero de comprobante
+			cell = row.getCell(Constants.TAX_SALE_B_TYPE_BILL_NUMBER_CELL_NUM);
+			ivaBillObject.setBillNumber(String.valueOf(BTypeBillGroupFrom));
+			ivaBillObject.setBillEndNumber(String.valueOf(BTypeBillGroupTo));
+			
+			//numero de identificacion del comprador
+			ivaBillObject.setBuyerIDNumber("");
+
+			//apellido y nombre del comprador
+			ivaBillObject.setBuyerFullName("");
+
+			//importe total operacion
+			ivaBillObject.setTotalPriceOperation(String.valueOf(BTypeBillGroupAmount));
+
+			ivaBillObject.setBuyerIDType("");
+			ivaBillObject.setTotalPriceConcepts("");
+			ivaBillObject.setUnCategorizePerceps("");
+			ivaBillObject.setTotalPriceExemptOp("");
+			ivaBillObject.setPriceOfNationalTaxes("");
+			ivaBillObject.setPriceOfIngrBrutTax("");
+			ivaBillObject.setPriceOfMunicipalTax("");
+			ivaBillObject.setPriceOfInternalTaxes("");
+			ivaBillObject.setCurrencyCode("");
+			ivaBillObject.setTypeOfExchange("");
+			ivaBillObject.setQuantityAlicIva("");
+			ivaBillObject.setCodeOperation("");
+			ivaBillObject.setOthersTributs("");
+			ivaBillObject.setDuePayDate("");
+			objectListSell.add(ivaBillObject);
+			System.out.println(ivaBillObject.toString());
+			return false;
+		} else {
+			cell = row.getCell(Constants.TAX_SALE_B_TYPE_BILL_NUMBER_CELL_NUM);
+			if (BTypeBillGroupFrom == 0) {
+				BTypeBillGroupFrom = (int) cell.getNumericCellValue();
+			}
+			BTypeBillGroupTo = (int) cell.getNumericCellValue();
+			cell = row.getCell(Constants.TAX_SALE_B_TYPE_BILL_TOTAL_PRICE_OPERATION_CELL_NUM);
+			BTypeBillGroupAmount += cell.getNumericCellValue();
+			return true;
+		}
 	}
 
 	/*

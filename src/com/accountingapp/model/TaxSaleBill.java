@@ -7,9 +7,9 @@ public class TaxSaleBill {
 	private String pointOfSale; //punto de venta
 	private String billNumber; //numero de comprobante
 	private String billEndNumber; //numero de comprobante hasta
-	private String sellerIDType; //codigo de documento vendedor
-	private String sellerIDNumber; //numero de identificacion del vendedor
-	private String sellerFullName; //apellido y nombre del vendedor
+	private String buyerIDType; //codigo de documento vendedor
+	private String buyerIDNumber; //numero de identificacion del vendedor
+	private String buyerFullName; //apellido y nombre del vendedor
 	private String totalPriceOperation; //importe total operacion
 	private String totalPriceConcepts; //importe total de conc. que no integral el precio neto gravado
 	private String unCategorizePerceps; //percepciones no categorizadas
@@ -55,23 +55,23 @@ public class TaxSaleBill {
 	public void setBillEndNumber(String billEndNumber) {
 		this.billEndNumber = billEndNumber;
 	}
-	public String getSellerIDType() {
-		return sellerIDType;
+	public String getBuyerIDType() {
+		return buyerIDType;
 	}
-	public void setSellerIDType(String sellerIDType) {
-		this.sellerIDType = sellerIDType;
+	public void setBuyerIDType(String buyerIDType) {
+		this.buyerIDType = buyerIDType;
 	}
-	public String getSellerIDNumber() {
-		return sellerIDNumber;
+	public String getBuyerIDNumber() {
+		return buyerIDNumber;
 	}
-	public void setSellerIDNumber(String sellerIDNumber) {
-		this.sellerIDNumber = sellerIDNumber;
+	public void setBuyerIDNumber(String buyerIDNumber) {
+		this.buyerIDNumber = buyerIDNumber;
 	}
-	public String getSellerFullName() {
-		return sellerFullName;
+	public String getBuyerFullName() {
+		return buyerFullName;
 	}
-	public void setSellerFullName(String sellerFullName) {
-		this.sellerFullName = sellerFullName;
+	public void setBuyerFullName(String buyerFullName) {
+		this.buyerFullName = buyerFullName;
 	}
 	public String getTotalPriceOperation() {
 		return totalPriceOperation;
@@ -160,8 +160,8 @@ public class TaxSaleBill {
 	@Override
 	public String toString() {
 		return "TaxSaleBill [billDate=" + billDate + ", billType=" + billType + ", pointOfSale="
-				+ pointOfSale + ", billNumber=" + billNumber + ", billEndNumber=" + billEndNumber + ", sellerIDType="
-				+ sellerIDType + ", sellerIDNumber=" + sellerIDNumber + ", sellerFullName=" + sellerFullName
+				+ pointOfSale + ", billNumber=" + billNumber + ", billEndNumber=" + billEndNumber + ", buyerIDType="
+				+ buyerIDType + ", buyerIDNumber=" + buyerIDNumber + ", buyerFullName=" + buyerFullName
 				+ ", totalPriceOperation=" + totalPriceOperation + ", totalPriceConcepts=" + totalPriceConcepts
 				+ ", unCategorizePerceps=" + unCategorizePerceps + ", totalPriceExemptOp=" + totalPriceExemptOp
 				+ ", priceOfNationalTaxes=" + priceOfNationalTaxes + ", priceOfIngrBrutTax=" + priceOfIngrBrutTax

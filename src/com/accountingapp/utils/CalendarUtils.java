@@ -25,7 +25,7 @@ public class CalendarUtils {
 	public String getLastDayOfMonth(Date date) {
 		Calendar cal = new GregorianCalendar(date.getYear()+1900, date.getMonth()+1, 0);
 		Date newDate = cal.getTime();
-		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		System.out.println("Date : " + sdf.format(newDate));
 		return sdf.format(newDate);
 	}

@@ -106,9 +106,9 @@ public class TXTWriter {
 				sb.append(BillFormatter.getPointOfSale(opb.getPointOfSale()));
 				sb.append(BillFormatter.getBillNumber(opb.getBillNumber()));
 				sb.append(BillFormatter.getBillNumber(opb.getBillEndNumber()));
-				sb.append(BillFormatter.getSellerIDType(opb.getSellerIDType()));
-				sb.append(BillFormatter.getSellerID(opb.getSellerIDNumber()));
-				sb.append(BillFormatter.getSellerName(opb.getSellerFullName()));			
+				sb.append(BillFormatter.getSellerIDType(opb.getBuyerIDType()));
+				sb.append(BillFormatter.getSellerID(opb.getBuyerIDNumber()));
+				sb.append(BillFormatter.getSellerName(opb.getBuyerFullName()));			
 				sb.append(BillFormatter.getAnyPrice(opb.getTotalPriceOperation()));
 				sb.append(BillFormatter.getAnyPrice(opb.getTotalPriceConcepts()));
 				sb.append(BillFormatter.getAnyPrice(opb.getUnCategorizePerceps()));
