@@ -86,13 +86,16 @@ public class BillFormatter {
 	}
 	
 	public static String getSellerID(String idSeller) throws IncorrectDataException{
-		
 		int size = 20;
 		String[] idSellerSplitted = idSeller.split("-");
-		if(idSellerSplitted[1].length() < 8){
-			throw new IncorrectDataException();	
+		try {
+			idSeller = idSellerSplitted[0] + idSellerSplitted[1] + idSellerSplitted[2];
+			if ((idSellerSplitted[0].length() < 2) || (idSellerSplitted[1].length() < 8) || (idSellerSplitted[2].length() < 1)) {
+				throw new IncorrectDataException("Número de identificación del vendedor inválido. Por favor, revise la planilla.");	
+			}
+		} catch(ArrayIndexOutOfBoundsException e) {
+			throw new IncorrectDataException("Número de identificación del vendedor inválido. Por favor, revise la planilla.");
 		}
-		idSeller = idSellerSplitted[0] + idSellerSplitted[1] + idSellerSplitted[2];
 		StringBuffer sb = new StringBuffer("");
 		for(int i=0; i < size - idSeller.length();i++)
 			sb.append("0");
@@ -217,8 +220,8 @@ public class BillFormatter {
 		if(!cuit.isEmpty()){
 			
 			String[] cuitIssuerSplitted = cuit.split("-");
-			if(cuitIssuerSplitted[1].length() < 8){
-				throw new IncorrectDataException();	
+			if ((cuitIssuerSplitted[0].length() < 2) || (cuitIssuerSplitted[1].length() < 8) || (cuitIssuerSplitted[2].length() < 1)) {
+				throw new IncorrectDataException("Número de identificación del vendedor inválido. Por favor, revise la planilla.");	
 			}
 			cuitIssuer = cuitIssuerSplitted[0] + cuitIssuerSplitted[1] + cuitIssuerSplitted[2];
 		

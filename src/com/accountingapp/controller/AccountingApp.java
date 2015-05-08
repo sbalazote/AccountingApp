@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -87,7 +89,15 @@ public class AccountingApp extends Application {
     	XLSReader reader = new XLSReader();
     	reader.readFile(new File(xlsFileNamePath));
     	TXTWriter write = new TXTWriter(outputFolderPath+"\\"+xlsFileName+".txt",reader);
-    	write.writeToTXTIvaBuy();
+    	try {
+    		write.writeToTXTIvaBuy();
+    	} catch (IncorrectDataException e) {
+    		Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error!");
+        	alert.setContentText(e.getMessage());
+
+        	alert.showAndWait();
+    	}
     }
     
     @FXML

@@ -74,7 +74,7 @@ public class TXTWriter {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				fwriter.close();
 			} catch (IOException e) {
