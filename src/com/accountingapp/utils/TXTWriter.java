@@ -125,7 +125,8 @@ public class TXTWriter {
 				
 				if ("".equals(opb.getDuePayDate())) {
 					sb.append(BillFormatter.getDuePayDate(opb.getBillDate()));
-				}
+				}else
+					sb.append("00000000");
 				
 				 
 				bw.write(sb.toString());

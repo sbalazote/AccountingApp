@@ -92,7 +92,7 @@ public class AccountingApp extends Application {
     	TXTWriter writeC = new TXTWriter(outputFolderPath+"\\"+xlsFileName+"Compras"+".txt",reader);
     	TXTWriter writeV = new TXTWriter(outputFolderPath+"\\"+xlsFileName+"Ventas"+".txt",reader);
     	try {
-    		//writeC.writeToTXTIvaBuy();
+    		writeC.writeToTXTIvaBuy();
     		writeV.writeToTXTIvaSell();
     	} catch (IncorrectDataException e) {
     		Alert alert = new Alert(AlertType.ERROR);
