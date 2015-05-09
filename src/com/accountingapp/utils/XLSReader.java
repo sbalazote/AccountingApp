@@ -189,7 +189,7 @@ public class XLSReader {
 			
 			//tipo de comprobante
 			// TODO que va aca?
-			String billType = "FA";
+			String billType = "A";
 			ivaBillObject.setBillType(billType);
 
 			//punto de venta
@@ -254,7 +254,7 @@ public class XLSReader {
 			
 			//tipo de comprobante
 			// TODO que va aca?
-			String billType = "FB";
+			String billType = "B";
 			ivaBillObject.setBillType(billType);
 
 			//punto de venta
