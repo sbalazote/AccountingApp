@@ -29,8 +29,10 @@ public class BillFormatter {
 		cal.add(Calendar.DAY_OF_WEEK, 10);
 		Date dateAddedTen = new Date(cal.getTimeInMillis());
 		String dateToString = formatter.format(dateAddedTen);
+		String[] splitteddate = dateToString.split("/");
+		String billDate= splitteddate[2] + splitteddate[1] + splitteddate[0];
 		
-		return dateToString;
+		return billDate;
 	}
 	
 	public static String getBillType(String type){
@@ -50,15 +52,9 @@ public class BillFormatter {
 	
 	public static String getBillNumber(String billNumber){
 			
-//		int size = 20;
-//		billNumber = billNumber.substring(0, 8);
-//		StringBuffer sb = new StringBuffer("");
-//		for(int i=0; i < size - billNumber.length() ; i++)
-//			sb.append("0");
-
-//		if(billNumber.contains("-"))
-//			billNumber=billNumber.split("-")[1];
-//		
+		if(billNumber.contains("-"))
+			billNumber=billNumber.split("-")[1];
+		
 		billNumber = String.format("%20s", billNumber ).replace(' ', '0');
 		
 		return billNumber;

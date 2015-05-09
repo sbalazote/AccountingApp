@@ -129,8 +129,9 @@ public class TXTWriter {
 					sb.append(BillFormatter.getDuePayDate(opb.getBillDate()));
 				}
 				 
-				
 				bw.write(sb.toString());
+				bw.write("\n");
+				bw.flush();
 				sb.delete(0, sb.length());
 			}
 		}catch (IOException e) {
