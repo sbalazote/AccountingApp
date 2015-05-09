@@ -115,7 +115,8 @@ public class XLSReader {
 	 */
 	private void readTaxSaleTicket(HSSFRow row, String ticketDate) {
 		TaxSaleBill ivaBillObject = new TaxSaleBill();
-
+		DecimalFormat decformat = new DecimalFormat("0.00");
+		
 		// Leo tickets por grupos hasta leer el mes completo.
 		Cell cell = row.getCell(Constants.TAX_SALE_TICKET_TYPE_CELL_NUM);
 
@@ -129,7 +130,7 @@ public class XLSReader {
 			ivaBillObject.setBuyerIDType("");
 			ivaBillObject.setBuyerIDNumber("");
 			ivaBillObject.setBuyerFullName("");
-			ivaBillObject.setTotalPriceOperation(String.valueOf(ticketGroupAmount));
+			ivaBillObject.setTotalPriceOperation(decformat.format(Math.abs(ticketGroupAmount)));
 			ivaBillObject.setTotalPriceConcepts("");
 			ivaBillObject.setUnCategorizePerceps("");
 			ivaBillObject.setTotalPriceExemptOp("");
@@ -172,6 +173,7 @@ public class XLSReader {
 	 */
 	private boolean readTaxSaleATypeBill(HSSFRow row) {
 		TaxSaleBill ivaBillObject = new TaxSaleBill();
+		DecimalFormat decformat = new DecimalFormat("0.00");
 
 		// Leo una factura.
 		Cell cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_CELL_NUM);
@@ -213,7 +215,7 @@ public class XLSReader {
 			//importe total operacion
 			cell = row.getCell(Constants.TAX_SALE_A_TYPE_BILL_TOTAL_PRICE_OPERATION_CELL_NUM);
 			float totalPriceOperation = (float) cell.getNumericCellValue();
-			ivaBillObject.setTotalPriceOperation(String.valueOf(totalPriceOperation));
+			ivaBillObject.setTotalPriceOperation(decformat.format(Math.abs(totalPriceOperation)));
 
 			ivaBillObject.setBuyerIDType("");
 			ivaBillObject.setTotalPriceConcepts("");
@@ -241,6 +243,7 @@ public class XLSReader {
 	 * @return true si la factura es valida; false en caso contrario.
 	 */
 	private boolean readTaxSaleBTypeBill(HSSFRow row, String billDate) {
+		DecimalFormat decformat = new DecimalFormat("0.00");
 		// Leo una factura.
 		Cell cell = row.getCell(Constants.TAX_SALE_B_TYPE_BILL_CELL_NUM);
 		// si la primer celda que indica tipo de documento esta en blanco termine de leer.
@@ -270,7 +273,7 @@ public class XLSReader {
 			ivaBillObject.setBuyerFullName("");
 
 			//importe total operacion
-			ivaBillObject.setTotalPriceOperation(String.valueOf(BTypeBillGroupAmount));
+			ivaBillObject.setTotalPriceOperation(decformat.format(Math.abs(BTypeBillGroupAmount)));
 
 			ivaBillObject.setBuyerIDType("");
 			ivaBillObject.setTotalPriceConcepts("");
