@@ -2,6 +2,7 @@ package com.accountingapp.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -85,12 +86,14 @@ public class AccountingApp extends Application {
 	}
     
     @FXML
-    private void generateTxt(ActionEvent event) throws IncorrectDataException {
+    private void generateTxt(ActionEvent event) throws IncorrectDataException, ParseException {
     	XLSReader reader = new XLSReader();
     	reader.readFile(new File(xlsFileNamePath));
-    	TXTWriter write = new TXTWriter(outputFolderPath+"\\"+xlsFileName+".txt",reader);
+    	TXTWriter writeC = new TXTWriter(outputFolderPath+"\\"+xlsFileName+"Compras"+".txt",reader);
+    	TXTWriter writeV = new TXTWriter(outputFolderPath+"\\"+xlsFileName+"Ventas"+".txt",reader);
     	try {
-    		write.writeToTXTIvaBuy();
+    		//writeC.writeToTXTIvaBuy();
+    		writeV.writeToTXTIvaSell();
     	} catch (IncorrectDataException e) {
     		Alert alert = new Alert(AlertType.ERROR);
         	alert.setTitle("Error!");

@@ -50,13 +50,18 @@ public class BillFormatter {
 	
 	public static String getBillNumber(String billNumber){
 			
-		int size = 20;
-		billNumber = billNumber.substring(0, 8);
-		StringBuffer sb = new StringBuffer("");
-		for(int i=0; i < size - billNumber.length() ; i++);
-			sb.append("0");
+//		int size = 20;
+//		billNumber = billNumber.substring(0, 8);
+//		StringBuffer sb = new StringBuffer("");
+//		for(int i=0; i < size - billNumber.length() ; i++)
+//			sb.append("0");
+
+//		if(billNumber.contains("-"))
+//			billNumber=billNumber.split("-")[1];
+//		
+		billNumber = String.format("%20s", billNumber ).replace(' ', '0');
 		
-		return sb.append(billNumber).toString();
+		return billNumber;
 		
 	}
 	
@@ -86,23 +91,28 @@ public class BillFormatter {
 	}
 	
 	public static String getSellerID(String idSeller) throws IncorrectDataException{
-		int size = 20;
-		String[] idSellerSplitted = idSeller.split("-");
-		try {
-			idSeller = idSellerSplitted[0] + idSellerSplitted[1] + idSellerSplitted[2];
-			if ((idSellerSplitted[0].length() < 2) || (idSellerSplitted[1].length() < 8) || (idSellerSplitted[2].length() < 1)) {
-				throw new IncorrectDataException("Número de identificación del vendedor inválido. Por favor, revise la planilla.");	
-			}
-		} catch(ArrayIndexOutOfBoundsException e) {
-			throw new IncorrectDataException("Número de identificación del vendedor inválido. Por favor, revise la planilla.");
-		}
-		StringBuffer sb = new StringBuffer("");
-		for(int i=0; i < size - idSeller.length();i++)
-			sb.append("0");
-		sb.append(idSeller);
-		
-		return sb.toString();
 
+		int size = 20;
+		StringBuffer sb = new StringBuffer("");
+
+		if(!idSeller.isEmpty()){
+			String[] idSellerSplitted = idSeller.split("-");
+			try {
+				idSeller = idSellerSplitted[0] + idSellerSplitted[1] + idSellerSplitted[2];
+				if ((idSellerSplitted[0].length() < 2) || (idSellerSplitted[1].length() < 8) || (idSellerSplitted[2].length() < 1)) {
+					throw new IncorrectDataException("Número de identificación del vendedor inválido. Por favor, revise la planilla.");	
+				}
+			} catch(ArrayIndexOutOfBoundsException e) {
+				throw new IncorrectDataException("Número de identificación del vendedor inválido. Por favor, revise la planilla.");
+			}
+			for(int i=0; i < size - idSeller.length();i++)
+				sb.append("0");
+			sb.append(idSeller);
+		}else{
+			for(int i=0; i < size;i++)
+				sb.append(' ');
+		}
+		return sb.toString();
 	}
 	
 	public static String getSellerName(String name){
@@ -239,7 +249,7 @@ public class BillFormatter {
 	
 	public static String getDenominationIssuer(String denomination){
 		
-		int size = 15;
+		int size = 30;
 		StringBuffer sb = new StringBuffer("");
 		String denominationIssuer = null;
 		
