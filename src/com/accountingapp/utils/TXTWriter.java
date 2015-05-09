@@ -123,11 +123,10 @@ public class TXTWriter {
 				sb.append(BillFormatter.getOperationCode(opb.getCodeOperation()));
 				sb.append(BillFormatter.getAnyPrice(opb.getOthersTributs()));
 				
-				if(!"".equals(opb.getDuePayDate())){
-					sb.append(BillFormatter.getBillDate(opb.getDuePayDate()));
-				}else{
+				if ("".equals(opb.getDuePayDate())) {
 					sb.append(BillFormatter.getDuePayDate(opb.getBillDate()));
 				}
+				
 				 
 				bw.write(sb.toString());
 				bw.write("\n");

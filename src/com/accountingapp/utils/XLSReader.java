@@ -147,7 +147,7 @@ public class XLSReader {
 			ivaBillObject.setQuantityAlicIva("");
 			ivaBillObject.setCodeOperation("");
 			ivaBillObject.setOthersTributs("");
-			ivaBillObject.setDuePayDate("");
+			ivaBillObject.setDuePayDate("00000000");
 			objectListSell.add(ivaBillObject);
 			System.out.println(ivaBillObject.toString());
 			initTicketGroup = false;
@@ -296,7 +296,7 @@ public class XLSReader {
 			ivaBillObject.setQuantityAlicIva("");
 			ivaBillObject.setCodeOperation("");
 			ivaBillObject.setOthersTributs("");
-			ivaBillObject.setDuePayDate("");
+			ivaBillObject.setDuePayDate("00000000");
 			objectListSell.add(ivaBillObject);
 			System.out.println(ivaBillObject.toString());
 			return false;

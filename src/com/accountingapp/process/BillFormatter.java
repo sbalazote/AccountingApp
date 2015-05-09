@@ -22,6 +22,7 @@ public class BillFormatter {
 	
 	public static String getDuePayDate(String date) throws ParseException {
 		
+		if (!date.equals("00000000")) {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date billOfdate = formatter.parse(date);
 		Calendar cal = new GregorianCalendar();
@@ -31,8 +32,12 @@ public class BillFormatter {
 		String dateToString = formatter.format(dateAddedTen);
 		String[] splitteddate = dateToString.split("/");
 		String billDate= splitteddate[2] + splitteddate[1] + splitteddate[0];
-		
 		return billDate;
+		} else {
+			return "00000000";
+		}
+		
+		
 	}
 	
 	public static String getBillType(String type){
