@@ -127,9 +127,13 @@ public class XLSReader {
 			ivaBillObject.setPointOfSale("0002");
 			ivaBillObject.setBillNumber(String.valueOf(ticketGroupFrom));
 			ivaBillObject.setBillEndNumber(String.valueOf(ticketGroupTo));
-			ivaBillObject.setBuyerIDType("");
+			ivaBillObject.setBuyerIDType("99");
 			ivaBillObject.setBuyerIDNumber("");
-			ivaBillObject.setBuyerFullName("");
+			if (ticketGroupAmount > 1000.0f) {
+				ivaBillObject.setBuyerFullName("VENTA GLOBAL DIARIA");
+			} else {
+				ivaBillObject.setBuyerFullName("");
+			}
 			ivaBillObject.setTotalPriceOperation(decformat.format(Math.abs(ticketGroupAmount)));
 			ivaBillObject.setTotalPriceConcepts("");
 			ivaBillObject.setUnCategorizePerceps("");
@@ -189,7 +193,7 @@ public class XLSReader {
 			
 			//tipo de comprobante
 			// TODO que va aca?
-			String billType = "FA";
+			String billType = "A";
 			ivaBillObject.setBillType(billType);
 
 			//punto de venta
@@ -254,7 +258,7 @@ public class XLSReader {
 			
 			//tipo de comprobante
 			// TODO que va aca?
-			String billType = "FB";
+			String billType = "B";
 			ivaBillObject.setBillType(billType);
 
 			//punto de venta
@@ -270,12 +274,16 @@ public class XLSReader {
 			ivaBillObject.setBuyerIDNumber("");
 
 			//apellido y nombre del comprador
-			ivaBillObject.setBuyerFullName("");
+			if (BTypeBillGroupAmount > 1000.0f) {
+				ivaBillObject.setBuyerFullName("VENTA GLOBAL DIARIA");
+			} else {
+				ivaBillObject.setBuyerFullName("");
+			}
 
 			//importe total operacion
 			ivaBillObject.setTotalPriceOperation(decformat.format(Math.abs(BTypeBillGroupAmount)));
 
-			ivaBillObject.setBuyerIDType("");
+			ivaBillObject.setBuyerIDType("99");
 			ivaBillObject.setTotalPriceConcepts("");
 			ivaBillObject.setUnCategorizePerceps("");
 			ivaBillObject.setTotalPriceExemptOp("");
